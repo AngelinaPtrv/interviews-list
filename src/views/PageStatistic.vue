@@ -8,7 +8,7 @@ const userStore = useUserStore()
 const db = getFirestore()
 const interviews = ref<IInterview[]>([])
 const chartData = ref()
-const chartOptions = ref(null)
+const chartOptions = ref()
 
 onMounted(async () => {
   interviews.value = await getAllInterviews()
@@ -63,6 +63,16 @@ const setChartData = () => {
 const setChartOptions = () => {
   const documentStyle = getComputedStyle(document.documentElement)
   const textColor = documentStyle.getPropertyValue('--p-text-color')
+  console.log({
+    plugins: {
+      legend: {
+        labels: {
+          cutout: '60%',
+          color: textColor
+        }
+      }
+    }
+  })
 
   return {
     plugins: {
